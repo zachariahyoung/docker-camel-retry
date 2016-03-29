@@ -10,7 +10,7 @@ public class MessageRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        errorHandler(deadLetterChannel("activemq:TEST").useOriginalMessage());
+        errorHandler(deadLetterChannel("activemq:TEST").useOriginalMessage().disableRedelivery());
 //		from("timer://trigger")
 //				.transform()
 //				.simple("ref:myBean")
