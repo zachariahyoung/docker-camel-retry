@@ -10,18 +10,9 @@ public class MessageRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        errorHandler(deadLetterChannel("activemq:TEST").useOriginalMessage().disableRedelivery());
-//		from("timer://trigger")
-//				.transform()
-//				.simple("ref:myBean")
-//				.to("log:out", "activemq:TRIGGER?timeToLive=5000");
-//
-//		from("timer://trigger")
-//				.transform()
-//				.simple("ref:myBean")
-//				.to("log:out", "activemq:TRIGGER");
+        errorHandler(deadLetterChannel("activemq:DEAD").useOriginalMessage());
 
-        from("activemqtx:TRIGGERTX")
+        from("activemqtx:SERVER.Q.SUBDOMAIN.OBJECTNAME")
                 .routeId("TriggerTX")
                     .onException(UpperCaseException.class)
                     .handled(true)

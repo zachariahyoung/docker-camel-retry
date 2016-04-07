@@ -52,7 +52,7 @@ public class ActiveMQConfiguration {
         // Connection Factory
 
         ActiveMQConnectionFactory activeMQConnectionFactory = activeMQConnectionFactory(consumerBrokerURL);
-        activeMQConnectionFactory.setRedeliveryPolicy(redeliveryPolicy());
+        //activeMQConnectionFactory.setRedeliveryPolicy(redeliveryPolicy());
 
         // Pooled Connection Factory
 
@@ -88,8 +88,8 @@ public class ActiveMQConfiguration {
         System.out.println("SETTING UP AMQ WITH: " + brokerURL);
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(brokerURL);
 
-        //activeMQConnectionFactory.setUserName(pidCredentials.getUsername());
-        //activeMQConnectionFactory.setPassword(pidCredentials.getPassword());
+        activeMQConnectionFactory.setUserName("jisazy1");
+        activeMQConnectionFactory.setPassword("haw123");
 
         return activeMQConnectionFactory;
     }
