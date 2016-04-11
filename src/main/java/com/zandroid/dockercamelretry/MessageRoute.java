@@ -9,21 +9,25 @@ public class MessageRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        getContext().setTracing(true);
 
-        errorHandler(deadLetterChannel("activemq:DEAD").useOriginalMessage());
+//        errorHandler(deadLetterChannel("activemq:LowerCaseException")
+//                .useOriginalMessage()
+//                .maximumRedeliveries(2)
+//                );
+
+        onException(UpperCaseException.class)
+                .handled(true)
+                .useOriginalMessage()
+                .maximumRedeliveries(2)
+                .to("activemq:UpperCaseException");
+
 
         from("activemqtx:SERVER.Q.SUBDOMAIN.OBJECTNAME")
-                .routeId("TriggerTX")
-                    .onException(UpperCaseException.class)
-                    .handled(true)
-                    .to("activemq:DEAD?timeToLive=5000")
-                    .end()
+                .routeId(MessageRoute.class.getSimpleName())
                 .bean("helloService")
-                .to("log:out");
-
-
-
-    }
+                .bean("byeService")
+                .to("log:myLog?level=INFO&showAll=true&multiline=true");   }
 
     @Bean
     public String myBean() {
