@@ -52,7 +52,7 @@ public class ActiveMQConfiguration {
         // Connection Factory
 
         ActiveMQConnectionFactory activeMQConnectionFactory = activeMQConnectionFactory(consumerBrokerURL);
-        //activeMQConnectionFactory.setRedeliveryPolicy(redeliveryPolicy());
+        activeMQConnectionFactory.setRedeliveryPolicy(redeliveryPolicy());
 
         // Pooled Connection Factory
 
@@ -66,6 +66,7 @@ public class ActiveMQConfiguration {
         activeMQComponent.setConnectionFactory(pooledConnectionFactory);
         activeMQComponent.setCacheLevel(DefaultMessageListenerContainer.CACHE_CONSUMER);
         activeMQComponent.setTransacted(true);
+
 
 
         return activeMQComponent;
