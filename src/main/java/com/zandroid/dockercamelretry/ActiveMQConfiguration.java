@@ -66,6 +66,8 @@ public class ActiveMQConfiguration {
         activeMQComponent.setConnectionFactory(pooledConnectionFactory);
         activeMQComponent.setCacheLevel(DefaultMessageListenerContainer.CACHE_CONSUMER);
         activeMQComponent.setTransacted(true);
+        activeMQComponent.setConcurrentConsumers(10);
+        activeMQComponent.setMaxConcurrentConsumers(50);
 
 
 
@@ -89,8 +91,6 @@ public class ActiveMQConfiguration {
         System.out.println("SETTING UP AMQ WITH: " + brokerURL);
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(brokerURL);
 
-        activeMQConnectionFactory.setUserName("jisazy1");
-        activeMQConnectionFactory.setPassword("haw123");
 
         return activeMQConnectionFactory;
     }

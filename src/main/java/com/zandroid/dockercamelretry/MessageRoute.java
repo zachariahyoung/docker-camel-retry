@@ -27,7 +27,18 @@ public class MessageRoute extends RouteBuilder {
                 .routeId(MessageRoute.class.getSimpleName())
                 .bean("helloService")
                 .bean("byeService")
-                .to("log:myLog?level=INFO&showAll=true&multiline=true");   }
+//                .to("log:myLog?level=INFO&showAll=true&multiline=true")
+                .to("activemq:error1");
+
+        from("activemqtx:SERVER.Q.SUBDOMAIN.OBJECTNAME.TEST")
+                .routeId("test")
+                .bean("helloService")
+                .bean("byeService")
+//                .to("log:myLog?level=INFO&showAll=true&multiline=true")
+                .to("activemq:error2");
+    }
+
+
 
     @Bean
     public String myBean() {
